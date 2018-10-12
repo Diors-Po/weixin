@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>视频管理</title>
+<link rel="stylesheet" type="text/css" href="/Weixin1/manage/css/css.css" />
+<script type="text/javascript" src="/Weixin1/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/Weixin1/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/Weixin1/js/jquery.form.js"></script>
+
+<style>
+.button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/Weixin1/manage/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">公共管理</a>&nbsp;-</span>&nbsp;食谱管理
+			</div>
+		</div>
+		<div class="page">
+			<!-- banner页面样式 -->
+			<div class="banner">
+				<div class="add">
+					<a class="addA" href="/Weixin1/manage/recipeEdit/add">添加菜谱&nbsp;&nbsp;+</a>
+				</div>
+			
+				<!-- banner 表格 显示 -->
+				<div >
+					<table border="1" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="66px" class="tdColor tdC">编号</td>
+							<td width="200px" class="tdColor">图片</td>
+							<td width="150px" class="tdColor">菜名</td>
+							<td width="300px" class="tdColor">主食材</td>
+							<td width="500px" class="tdColor">适宜人群</td>
+							<td width="180px" class="tdColor">视频VID</td>
+							<td width="125px" class="tdColor">操作</td>
+						</tr>
+						#for(x : recipePage.getList())
+						<tr>
+							<td>#(x.id)</td>
+							<td><div class="bsImg">
+									<img src="/Weixin1#(x.img==null ? '/img/recipe_no_img.jpg' : x.img)">
+								</div></td>
+							<td>#(x.name)</td>
+							<td>#(x.material)</td>
+							<td>#(x.suitpeople)</td>
+							<td>#(x.vid)</td>
+							<td><a href="/Weixin1/manage/recipeEdit/#(x.id)"><img class="operation" src="/Weixin1/manage/img/update.png"></a> 
+							<a href="/Weixin1/manage/recipeDelete/#(x.id)" onclick="return confirm('确认删除？')"><img class="operation delban" src="/Weixin1/manage/img/delete.png"></a></td>
+						</tr>
+						#end
+						
+					</table>
+					<br></br>
+					<div align="center">
+						<a  type="button" class="button" href="/Weixin1/manage/preRecipePage/#(pageNum)" onclick="return getPre()">上一页</a>
+						<label >#(recipePage.totalPage==0?0:recipePage.pageNumber)页/#(recipePage.totalPage)页</label>
+						<a type="button" class="button" href="/Weixin1/manage/nextRecipePage/#(pageNum)-#(totalPage)" onclick="return getNext()">下一页</a>
+					</div>
+					<input id="pageNum" type="hidden" value="#(pageNum)"></input>
+					<input id="totalPage" type="hidden" value="#(totalPage)"></input>
+					<script type="text/javascript">
+						function getPre(){
+							var pageNum = $("#pageNum").val();
+							if(pageNum == 1){
+								alert("当前已经是第一页！！");
+								return false;
+							}
+							return true;
+
+						}
+						
+						function getNext(){
+							var pageNum = $("#pageNum").val();
+							var totalPage = $("#totalPage").val();
+							if(pageNum == totalPage){
+								alert("当前已经是最后一页！！");
+								return false;
+							}
+							return true;
+						}
+					</script>	
+					
+					<br></br>
+					<br></br>
+					<br></br>
+					
+				</div>
+	
+				<!-- recipe 表格 显示 end-->
+			</div>
+			<!-- recipe页面样式end -->
+		</div>
+
+	</div>
+
+
+	
+</body>
+
+
+</html>

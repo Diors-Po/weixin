@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改密码</title>
+<link rel="stylesheet" type="text/css" href="/Weixin1/manage/css/css.css" />
+<script type="text/javascript" src="/Weixin1/manage/js/jquery.min.js"></script>
+<style type="text/css">
+textarea{
+  vertical-align:top;
+}
+</style>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/Weixin1/manage/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">系统管理</a>&nbsp;-</span>&nbsp;修改密码
+			</div>
+		</div>
+		<div class="page ">
+			<!-- 上传药品页面样式 -->
+			<div class="banneradd bor">
+				<div class="baTop">
+					<span>修改密码</span>
+				</div>
+				<form action="/Weixin1/admin/changePwd" method="post">
+				<div class="baBody">
+					<div class="bbD">
+						新&nbsp;&nbsp;密&nbsp;&nbsp;码：<input id="password" name="password" type="password" required="这是必填字段" class="input1" />
+					</div>
+					<div><br></div>
+					<div class="bbD">
+						重复密码：<input id="password1" name="password1" type="password" required="这是必填字段" class="input1" />
+					</div>
+					<div class="bbD">
+						<p class="bbDP">
+							<button type="submit" class="btn_ok btn_yes" onclick="return checkpwd()">提交</button>
+							<a class="btn_ok btn_no" target="_top" href="/Weixin1/manage">取消</a>
+						</p>
+					</div>
+				</div>
+				</form>
+				<script type="text/javascript">
+					function checkpwd(){
+						var pwd = document.getElementById("password").value;
+						var pwd1 = document.getElementById("password1").value;
+						if(pwd==pwd1){
+							return confirm("确认修改？")
+						}
+							
+						else{
+							alert("两次输入密码不一致！");
+							return false;
+						}
+					}
+				</script>
+			</div>
+
+			<!-- 上传药品页面样式end -->
+		</div>
+	</div>
+</body>
+</html>

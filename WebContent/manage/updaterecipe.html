@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加菜谱</title>
+<link rel="stylesheet" type="text/css" href="/Weixin1/manage/css/css.css" />
+<script type="text/javascript" src="/Weixin1/manage/js/jquery.min.js"></script>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/Weixin1/manage/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">公共管理</a>&nbsp;-</span>&nbsp;菜谱管理
+			</div>
+		</div>
+		<div class="page ">
+			<!-- 上传菜谱页面样式 -->
+			<div class="banneradd bor">
+				<div class="baTop">
+					<span>修改菜谱</span>
+				</div>
+				<form action="/Weixin1/manage/recipeUpdate"  enctype="multipart/form-data" method="post">
+				<input type="hidden" name="id" value="#(this.id)"/>
+				<div class="baBody">
+					<div class="bbD">
+						菜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input name="name" type="text" value="#(this.name)" required="这是必填字段" class="input1" />
+					</div>
+					<div class="bbD">
+						视&nbsp;频VID：<input name="vid" type="text" value="#(this.vid)" class="input1" />
+					</div>
+					<div class="bbD">
+						缩&nbsp;&nbsp;略&nbsp;&nbsp;图：<input id="file" name="img" type="file" accept="image/*" onchange="changePic(this)" /> 
+					</div>
+					<div class="bbD">
+						<img id="show" src="/Weixin1#(this.img==null?'/img/recipe_no_img.jpg':this.img)">
+					</div>
+					<div class="bbD">
+						烹饪方法：<input name="method" type="text" value="#(this.method)"  class="input1" />
+					</div>
+					<div class="bbD">
+						主要食材：<input name="material" type="text" value="#(this.material)" class="input1" />
+					</div>
+					<div class="bbD">
+						适宜人群：<input name="suitpeople" class="input1" type="text" value="#(this.suitpeople)" required="这是必填字段"/>
+					</div>
+					<div class="bbD">
+						<p class="bbDP">
+							<button type="submit" class="btn_ok btn_yes" onclick="return confirm('确认提交？')">提交</button>
+							<a class="btn_ok btn_no" href="/Weixin1/manage/recipeManage">取消</a>
+						</p>
+					</div>
+				</div>
+				</form>
+				<script type="text/javascript">
+					function changePic(){
+						var reads = new FileReader();
+						f = document.getElementById("file").files[0];
+						reads.readAsDataURL(f);
+						reads.onload=function(e){
+							document.getElementById("show").src=this.result;
+						}
+					}
+				</script>
+			</div>
+
+			<!-- 上传菜谱页面样式end -->
+		</div>
+	</div>
+</body>
+</html>

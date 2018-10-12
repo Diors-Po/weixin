@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加药品</title>
+<link rel="stylesheet" type="text/css" href="/Weixin1/manage/css/css.css" />
+<script type="text/javascript" src="/Weixin1/manage/js/jquery.min.js"></script>
+<style type="text/css">
+textarea{
+  vertical-align:top;
+}
+</style>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/Weixin1/manage/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">公共管理</a>&nbsp;-</span>&nbsp;药品管理
+			</div>
+		</div>
+		<div class="page ">
+			<!-- 上传药品页面样式 -->
+			<div class="banneradd bor">
+				<div class="baTop">
+					<span>添加药品</span>
+				</div>
+				<form action="/Weixin1/manage/medicineAdd"  enctype="multipart/form-data" method="post">
+				<div class="baBody">
+					<div class="bbD">
+						药品名称：<input name="name" type="text" required="这是必填字段" class="input1" />
+					</div>
+					
+					<div class="bbD">
+						药品图片：<input id="file" name="img" type="file" accept="image/*" onchange="changePic(this)" /> 
+					</div>
+					<div class="bbD">
+						<img id="show" src="/Weixin1/img/medicine_no_img.jpg">
+					</div>
+					<div class="bbD">
+						详细说明：<textarea name="details" rows="20" cols="130" required="这是必填信息"></textarea>
+					</div>
+					<div class="bbD">
+						<p class="bbDP">
+							<button type="submit" class="btn_ok btn_yes" onclick="return confirm('确认提交？')">提交</button>
+							<a class="btn_ok btn_no" href="/Weixin1/manage/medicineManage">取消</a>
+						</p>
+					</div>
+				</div>
+				</form>
+				<script type="text/javascript">
+					function changePic(){
+						var reads = new FileReader();
+						f = document.getElementById("file").files[0];
+						reads.readAsDataURL(f);
+						reads.onload=function(e){
+							document.getElementById("show").src=this.result;
+						}
+					}
+				</script>
+			</div>
+
+			<!-- 上传药品页面样式end -->
+		</div>
+	</div>
+</body>
+</html>

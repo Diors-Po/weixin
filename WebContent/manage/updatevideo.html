@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加视频</title>
+<link rel="stylesheet" type="text/css" href="/Weixin1/manage/css/css.css" />
+<script type="text/javascript" src="/Weixin1/manage/js/jquery.min.js"></script>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/Weixin1/manage/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">公共管理</a>&nbsp;-</span>&nbsp;视频管理
+			</div>
+		</div>
+		<div class="page ">
+			<!-- 上传视频页面样式 -->
+			<div class="banneradd bor">
+				<div class="baTop">
+					<span>修改视频信息</span>
+				</div>
+				<form action="/Weixin1/manage/videoUpdate"  enctype="multipart/form-data" method="post">
+				<input type="hidden" name="id" value="#(this.id)"/>
+				<div class="baBody">
+					<div class="bbD">
+						名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：<input name="name" value="#(this.name)" type="text" required="这是必填字段" class="input1" />
+					</div>
+					<div class="bbD">
+						视&nbsp;频VID：<input name="vid" value="#(this.vid)" type="text" required="这是必填字段" class="input1" />
+					</div>
+					<div class="bbD">
+						缩&nbsp;&nbsp;略&nbsp;&nbsp;图：<input id="file" name="img" type="file" accept="image/*" onchange="changePic(this)" /> 
+					</div>
+					<div class="bbD">
+						<img id="show" src="/Weixin1#(this.img)">
+					</div>
+					<div class="bbD">
+						描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述：<input name="description" value="#(this.description)" type="text"  class="input1" />
+					</div>
+					<div class="bbD">
+						所需积分：<input name="price" value="#(this.price)" class="input2" type="number" required="这是必填字段"/>
+					</div>
+					<div class="bbD">
+						<p class="bbDP">
+							<button type="submit" class="btn_ok btn_yes" onclick="return confirm('确认提交？')">提交</button>
+							<a class="btn_ok btn_no" href="/Weixin1/manage/videoManage">取消</a>
+						</p>
+					</div>
+				</div>
+				</form>
+				<script type="text/javascript">
+					function changePic(){
+						var reads = new FileReader();
+						f = document.getElementById("file").files[0];
+						reads.readAsDataURL(f);
+						reads.onload=function(e){
+							document.getElementById("show").src=this.result;
+						}
+					}
+				</script>
+			</div>
+
+			<!-- 上传视频页面样式end -->
+		</div>
+	</div>
+</body>
+</html>

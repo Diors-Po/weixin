@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>病友管理</title>
+<link rel="stylesheet" type="text/css" href="/Weixin1/manage/css/css.css" />
+<script type="text/javascript" src="/Weixin1/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/Weixin1/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/Weixin1/js/jquery.form.js"></script>
+
+<style>
+.button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.redbutton {
+    background-color: #f44336; /* red */
+    border: none;
+    color: white;
+    padding: 3% 4%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 8px;
+}
+.greenbutton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 3% 4%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 8px;
+}
+.orangebutton {
+    background-color: #FFA500; /* Green */
+    border: none;
+    color: white;
+    padding: 3% 4%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+</style>
+</head>
+
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/Weixin1/manage/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">病友管理</a>&nbsp;-</span>&nbsp;病友分享（未通过审核）
+			</div>
+		</div>
+		<div class="page">
+			<!-- banner页面样式 -->
+			<div class="banner">
+				<div>
+					<br />
+				</div>
+				<h3>待审核</h3>
+				<!-- banner 表格 显示 -->
+				<div class="banShow">
+					<table border="1" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="66px" class="tdColor tdC">编号</td>
+							<td width="250px" class="tdColor">标题</td>
+							<td width="110px" class="tdColor">作者</td>
+							<td width="100px" class="tdColor">发布时间</td>
+							<td width="600px" class="tdColor">内容</td>
+							<td width="90px" class="tdColor">状态</td>
+							<td width="150px" class="tdColor">修改状态</td>
+							<td width="90px" class="tdColor">操作</td>
+						</tr>
+						#for(x : reviewPage.getList())
+						<tr>
+							<td height="30px">#(x.id)</td>
+							<td>#(x.title)</td>
+							<td>#(x.uname)</td>
+							<td>#(x.time)</td>
+							<td>#(x.details)</td>
+							<td>#(x.state)</td>
+							<td>
+								<a type="button" class="greenbutton" href="/Weixin1/userManage/updateArticle/#(x.id)-pass-0" onclick="return confirm('确认操作？')">通过</a>
+								<a type="button" class="redbutton" href="/Weixin1/userManage/updateArticle/#(x.id)-nopass-0" onclick="return confirm('确认操作？')">不通过</a>
+							</td>
+							<td>
+								<a href="/Weixin1/userManage/deleteArticle/#(x.id)-0" onclick="return confirm('确认删除？')">
+									<img class="operation delban" src="/Weixin1/manage/img/delete.png">
+								</a>
+							</td>
+						</tr>
+						#end
+					</table>
+					
+					<div align="center">
+						<a  type="button" class="button" href="/Weixin1/userManage/preArticlePage/#(pageNum)-review-#(pageNum1)" onclick="return getPre()">上一页</a>
+						<label >#(reviewPage.totalPage==0?0:reviewPage.pageNumber)页/#(reviewPage.totalPage)页</label>
+						<a type="button" class="button" href="/Weixin1/userManage/nextArticlePage/#(pageNum)-#(totalPage)-review-#(pageNum1)" onclick="return getNext()">下一页</a>
+					</div>
+					
+					<input id="pageNum" type="hidden" value="#(pageNum)"></input>
+					<input id="totalPage" type="hidden" value="#(totalPage)"></input>
+					
+					<script type="text/javascript">
+						function getPre(){
+							var pageNum = $("#pageNum").val();
+							if(pageNum == 1){
+								alert("当前已经是第一页！！");
+								return false;
+							}
+							return true;
+						}
+						
+						function getNext(){
+							var pageNum = $("#pageNum").val();
+							var totalPage = $("#totalPage").val();
+							if(pageNum == totalPage){
+								alert("当前已经是最后一页！！");
+								return false;
+							}
+							return true;
+						}
+					</script>	
+
+				</div>
+				<br></br>
+				<h3>审核未通过</h3>
+				<!-- banner 表格 显示 -->
+				<div class="banShow">
+					<table border="1" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="66px" class="tdColor tdC">编号</td>
+							<td width="250px" class="tdColor">标题</td>
+							<td width="110px" class="tdColor">作者</td>
+							<td width="100px" class="tdColor">发布时间</td>
+							<td width="600px" class="tdColor">内容</td>
+							<td width="90px" class="tdColor">状态</td>
+							<td width="150px" class="tdColor">修改状态</td>
+							<td width="90px" class="tdColor">操作</td>
+						</tr>
+						#for(x : reviewPage1.getList())
+						<tr>
+							<td height="30px">#(x.id)</td>
+							<td>#(x.title)</td>
+							<td>#(x.uname)</td>
+							<td>#(x.time)</td>
+							<td>#(x.details)</td>
+							<td>#(x.state)</td>
+							<td>
+								<a type="button" class="greenbutton" href="/Weixin1/userManage/updateArticle/#(x.id)-pass-0" onclick="return confirm('确认操作？')">通过</a>
+								<a type="button" class="orangebutton" href="/Weixin1/userManage/updateArticle/#(x.id)-waitreview-0" onclick="return confirm('确认操作？')">待审核</a>
+							</td>
+							<td>
+								<a href="/Weixin1/userManage/deleteArticle/#(x.id)-0" onclick="return confirm('确认删除？')">
+									<img class="operation delban" src="/Weixin1/manage/img/delete.png">
+								</a>
+							</td>
+						</tr>
+						#end
+					</table>
+					<div align="center">
+						<a  type="button" class="button" href="/Weixin1/userManage/preArticlePage/#(pageNum1)-review1-#(pageNum)" onclick="return getPre1()">上一页</a>
+						<label >#(reviewPage1.totalPage==0?0:reviewPage1.pageNumber)页/#(reviewPage1.totalPage)页</label>
+						<a type="button" class="button" href="/Weixin1/userManage/nextArticlePage/#(pageNum1)-#(totalPage1)-review1-#(pageNum)" onclick="return getNext1()">下一页</a>
+					</div>
+					
+					<input id="pageNum1" type="hidden" value="#(pageNum1)"></input>
+					<input id="totalPage1" type="hidden" value="#(totalPage1)"></input>
+					
+					<script type="text/javascript">
+						function getPre1(){
+							var pageNum = $("#pageNum1").val();
+							if(pageNum == 1){
+								alert("当前已经是第一页！！");
+								return false;
+							}
+							return true;
+						}
+						
+						function getNext1(){
+							var pageNum = $("#pageNum1").val();
+							var totalPage = $("#totalPage1").val();
+							if(pageNum == totalPage){
+								alert("当前已经是最后一页！！");
+								return false;
+							}
+							return true;
+						}
+					</script>	
+					
+					<br></br>
+					<br></br>
+					<br></br>
+					
+				</div>
+	
+				<!-- 表格 显示 end-->
+			</div>
+			<!-- 页面样式end -->
+		</div>
+
+	</div>
+
+
+	
+</body>
+
+
+</html>

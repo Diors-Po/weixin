@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>药品管理</title>
+<link rel="stylesheet" type="text/css" href="/Weixin1/manage/css/css.css" />
+<script type="text/javascript" src="/Weixin1/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="/Weixin1/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/Weixin1/js/jquery.form.js"></script>
+
+<style>
+.button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.greenbutton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="/Weixin1/manage/img/coin02.png" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">系统管理</a>&nbsp;-</span>&nbsp;推广情况
+			</div>
+		</div>
+		<div class="page">
+			<!-- banner页面样式 -->
+			<div class="banner">
+				<div class="add">
+					<a class="addA" href="/Weixin1/manage/addpop.html">添加推广人员&nbsp;&nbsp;+</a>
+				</div>
+			
+				<!-- banner 表格 显示 -->
+				<div >
+					<table border="1" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="66px" class="tdColor tdC">编号</td>
+							<td width="150px" class="tdColor">姓名</td>
+							<td width="300px" class="tdColor">扫码次数</td>
+							<td width="500px" class="tdColor">查看</td>
+							<td width="180px" class="tdColor">小程序码</td>
+							<td width="125px" class="tdColor">操作</td>
+						</tr>
+						#for(x : popPage)
+						<tr>
+							<td>#(x.id)</td>
+							<td>#(x.name)</td>
+							<td>#(x.count)</td>
+							<td><button id="#(x.id)" type="button" class="greenbutton" onclick="kick(this)">显示图片</button></td>
+							
+							<td><div id="qrcode#(x.id)" class="bsImg" style="display:none">
+									<img src="/Weixin1/img/qrcode/#(x.name).jpg" style="width:128;height:128px"></img>
+								</div></td>
+							<td>
+								<a href="/Weixin1/manage/popDelete/#(x.id)" onclick="return confirm('确认删除？')"><img class="operation delban" src="/Weixin1/manage/img/delete.png"></a>
+							</td>
+						</tr>
+						#end
+						
+					</table>
+					<br></br>
+
+					<script type="text/javascript">
+						function kick(obj){
+							var text = obj.innerHTML;
+							if(text=="显示图片"){								
+								obj.innerHTML = "收起";
+								var id = "qrcode"+obj.id;
+								document.getElementById(id).style.display="block";
+							}else{
+								obj.innerHTML = "显示图片";
+								var id = "qrcode"+obj.id;
+								document.getElementById(id).style.display="none";
+							}
+						}
+					</script>	
+					
+					<br></br>
+					<br></br>
+					<br></br>
+					
+				</div>
+	
+				<!-- medicine 表格 显示 end-->
+			</div>
+			<!-- medicine页面样式end -->
+		</div>
+
+	</div>
+
+
+	
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
