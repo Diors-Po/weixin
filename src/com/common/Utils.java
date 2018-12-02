@@ -10,14 +10,21 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.jfinal.kit.PropKit;
 
 
 public class Utils {
 	//private static String appID = "wx125ca331b58f7896";//appID
 	//private static String secret = "e7ac594400e78556500eb656d7b07555";//SECRET
 	
-	private static String appID = "wx581eddc17c7be1d1";//appID
-	private static String secret = "e745e908edad2f469e29b335202ffb9d";//SECRET
+//	private static String appID = "wx581eddc17c7be1d1";//appID
+//	private static String secret = "e745e908edad2f469e29b335202ffb9d";//SECRET
+	
+//	private static String appID = "wx371683b1fcfbd168";//appID
+//	private static String secret = "563fe5124bde7299fdaf2cd143231971";//SECRET
+	
+	private static String appID = PropKit.get("appID");
+	private static String secret = PropKit.get("secret");
 	
 	private static String getAqrURL = "https://api.weixin.qq.com/wxa/getwxacode?access_token=";
 	private static String getAccessTokenURL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+appID+"&secret="+secret;
